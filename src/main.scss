@@ -9,26 +9,42 @@ $primary_1: #a2b9bc;
 $primary_2: #b2ad7f;
 $primary_3: #878f99;
 
+$coloreHover: darkblue;
+
+@mixin bodyAndHeader($color: blue)    //creo un mixin, potro con una sola riga di codice applicare queste proprietà sia in body che in header
+{   //potrò passare un parametro al mixin che verrà usato come "right value" da "assegnare" a color, blue come valore di default
+    background-color: $bgcolor;
+    color: $color;
+    font-size: $fontsize;
+}
+
 //commento anche in linea, i commenti classici del CSS restano nel transpillato e quelli in line scompaiono
-body {
-background-color: $bgcolor;
-color: $textcolor;
-font-size: $fontsize;
-} 
+body 
+{
+    @include bodyAndHeader($textcolor);
+}
 
 .menuContainer
 {
+    
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     background-color: $primary_2;
+    font: //font-family font-size e font-wight innestate, ci auto-costringiamo ad essere ordinati e meno rischio di lasciare proprietà legate allo stesso elemento sparse
+    {
+        family: Helvetica, sans-serif;
+        size: 30px;
+        weight: bold;
+    }
 }
 
 .homeClass
 {
+    $coloreHover: darkred !global; //all'interno di homeclass grazie a !global ridefinisco la variabile coloreHover(già esistente) a livello globale
     order: 0;
     &:hover {
-        color:darkred;
+        color: $coloreHover;
     }
     
 }
@@ -37,7 +53,7 @@ font-size: $fontsize;
 {
     order: 1;
     &:hover {
-        color:darkred;
+        color: $coloreHover;       //sarà rosso nonostante ho definito che è rosso in homeclass (ridefinzione globale con !global)
     }
 }
 
@@ -45,7 +61,7 @@ font-size: $fontsize;
 {
     order: 2;
     &:hover {
-        color:darkred;
+        color: $coloreHover;
     }
 }
 
@@ -58,7 +74,12 @@ font-size: $fontsize;
 
 .leftMenu
 {
+    $fontsize: 15px;    //variabile locale che all'interno del suo contesto di definizione sovrascrive l'omonima globale
+    font-size: $fontsize;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
+
+//se avessi un altro menu come left menu e volessi copiare le stesse proprietà potrei usare come un copia e incolla di tutto ciò che sta in leftMenu dentro rightMenu
+.rightMenu { @extend .leftMenu }   
