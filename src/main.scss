@@ -1,0 +1,64 @@
+
+/* Define standard variables and values for website */
+$bgcolor: lightblue;
+$textcolor: darkblue;
+$fontsize: 30px;
+
+/* define variables for the primary colors */
+$primary_1: #a2b9bc;
+$primary_2: #b2ad7f;
+$primary_3: #878f99;
+
+//commento anche in linea, i commenti classici del CSS restano nel transpillato e quelli in line scompaiono
+body {
+background-color: $bgcolor;
+color: $textcolor;
+font-size: $fontsize;
+} 
+
+.menuContainer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: $primary_2;
+}
+
+.homeClass
+{
+    order: 0;
+    &:hover {
+        color:darkred;
+    }
+    
+}
+
+.infoClass
+{
+    order: 1;
+    &:hover {
+        color:darkred;
+    }
+}
+
+.susClass
+{
+    order: 2;
+    &:hover {
+        color:darkred;
+    }
+}
+
+.content
+{
+    display: flex;
+    
+    gap: 30px;
+}
+
+.leftMenu
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
